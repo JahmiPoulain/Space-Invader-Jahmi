@@ -56,9 +56,10 @@ public class EnemyMissile : MonoBehaviour
     {        
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.SetActive(false);
 
-            GameManager.instance.GameOver();
+            //collision.gameObject.GetComponent<PlayerScript>().HitByMissile();
+
+            GameManager.instance.LoseLife();//GameOver();
             ResetMissile();
         }
         /*if (collision.CompareTag("Shield"))

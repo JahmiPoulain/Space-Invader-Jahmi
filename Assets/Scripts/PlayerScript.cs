@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static PlayerScript instance;
     [Header("speed")]
     public float speed;
     float currentSpeed = 0f;
@@ -35,6 +36,14 @@ public class PlayerScript : MonoBehaviour
     #region InitializeRegion
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         Application.targetFrameRate = 60; // definir un framerate
         rb = GetComponent<Rigidbody2D>();
         controls = new InputSystem_Actions(); // initialiser input
@@ -164,6 +173,11 @@ public class PlayerScript : MonoBehaviour
         }
         /*currentSpeed += Mathf.Sign(targetSpeed) * curveValue * speed * Time.fixedDeltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -speed, speed);*/
+    }
+
+    public void HitByMissile()
+    {
+        gameObject.SetActive(false);
     }
 
     #region CalculateBoundaryAndGizmos

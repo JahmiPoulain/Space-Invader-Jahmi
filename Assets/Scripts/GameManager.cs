@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour
 
     public void LoseLife()
     {
-
         lives--;
+        PlayerScript.instance.HitByMissile();
         if (lives == 0)
         {
             GameOver();
