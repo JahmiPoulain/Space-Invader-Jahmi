@@ -9,13 +9,18 @@ public class GameManager : MonoBehaviour
     private InputSystem_Actions controls;
 
     [SerializeField] int score = 0;
-    int lives = 3;
+    public int lives = 3;
     public int highScore;
 
     [SerializeField]
     TMP_Text _scoreUI;
     [SerializeField]
     TMP_Text _highScoreUI;
+    [SerializeField]
+    TMP_Text _lifeUI;
+
+    public GameObject UILife1;
+    public GameObject UILife2;
 
     void Awake()
     {
@@ -73,10 +78,20 @@ public class GameManager : MonoBehaviour
     {
         lives--;
         PlayerScript.instance.HitByMissile();
+        // on enleve les vies en bas a gauche de l'ecran
+        if (lives == 2 && UILife2.activeSelf)
+        {
+            UILife2.SetActive(false);
+        }
+        else if (lives == 1 && UILife1.activeSelf)
+        {
+            UILife1.SetActive(false);
+        }
         if (lives == 0)
         {
             GameOver();
         }
+        _lifeUI.text = lives.ToString();
     }
 
     public void GameOver()

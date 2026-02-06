@@ -15,12 +15,15 @@ public class PlayerScript : MonoBehaviour
     float decellTime = 0f;
     public int decelFrameDuration;
     public AnimationCurve decelValue; //courbe deceleration
+    Vector2 moveInput;
     [Header("limites")]
     public float boundary;
     [Range(0f, 1f)]
     private  float boundaryPercentage = 0.55f;
+    [Header("respawn")]
+    public Vector3 respawnPoint;
 
-    Vector2 moveInput;
+    
     //[Header("state machine")]
     private enum PlayerState
     {
@@ -177,7 +180,14 @@ public class PlayerScript : MonoBehaviour
 
     public void HitByMissile()
     {
-        gameObject.SetActive(false);
+        if (GameManager.instance != null && GameManager.instance.lives > 0) 
+        {
+            transform.position = respawnPoint;            
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     #region CalculateBoundaryAndGizmos
