@@ -22,8 +22,18 @@ public class PlayerScript : MonoBehaviour
     private  float boundaryPercentage = 0.55f;
     [Header("respawn")]
     public Vector3 respawnPoint;
-
-    
+    public int totalRespawnFrames;   
+    int currentRespawnFrame;
+    public bool respawnBool;
+    [Header("respawn explosion")]
+    public int explosionFrames = 55;
+    public int explosionFramesDelay;
+    int currentExplosionFrameDelay;
+    SpriteRenderer spriteRenderer;
+    public Sprite explosionSprite1;
+    public Sprite explosionSprite2;
+    public Sprite playerSprite;
+    bool isExplosionSprite1;
     //[Header("state machine")]
     private enum PlayerState
     {
@@ -53,6 +63,7 @@ public class PlayerScript : MonoBehaviour
         controls.Player.Move.performed += ctx => HandheldMovePressed(ctx);
         controls.Player.Move.canceled += ctx => HandheldMoveRelease(ctx);
         CalculateBoundary();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -115,6 +126,10 @@ public class PlayerScript : MonoBehaviour
 
         rb.MovePosition(new Vector2(newXPosition, rb.position.y));
 
+        if (respawnBool)
+        {
+            RespawnPlayer();
+        }
        // Debug.Log($"State : {currentState}, Current speed : {");
     }
     void Update()
@@ -124,6 +139,10 @@ public class PlayerScript : MonoBehaviour
 
     private void HandheldMovePressed(InputAction.CallbackContext ctx)
     {
+        if (GameManager.instance.isPaused || respawnBool)
+        {
+            return;
+        }
         moveInput = ctx.ReadValue<Vector2>();
         targetSpeed = Mathf.Clamp(moveInput.x * speed, -speed, speed);
         accelTime = 0f;
@@ -148,6 +167,12 @@ public class PlayerScript : MonoBehaviour
 
         currentSpeed += Mathf.Sign(targetSpeed) * curveValue * speed * Time.fixedDeltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -speed, speed);
+
+        if (respawnBool)
+        {
+            currentSpeed = 0f;
+            accelTime = 0f;
+        }
     }
 
     void HandleDeceleration()
@@ -174,6 +199,12 @@ public class PlayerScript : MonoBehaviour
             currentSpeed = 0f;
             decellTime = 0f;
         }
+
+        if (respawnBool)
+        {
+            currentSpeed = 0f;
+            decellTime = 0f;
+        }
         /*currentSpeed += Mathf.Sign(targetSpeed) * curveValue * speed * Time.fixedDeltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -speed, speed);*/
     }
@@ -182,13 +213,51 @@ public class PlayerScript : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.lives > 0) 
         {
-            transform.position = respawnPoint;            
+            if (!respawnBool)
+            {
+                EnemyManager.instance.isExploding = true;
+                respawnBool = true;
+            }
         }
         else
         {
             gameObject.SetActive(false);
         }
     }
+
+    void RespawnPlayer()
+    {
+        currentRespawnFrame++;
+        if (currentRespawnFrame < explosionFrames)
+        {
+            ExplosionAnimation();
+        }
+        else 
+        {
+            spriteRenderer.sprite = null;
+            if (currentRespawnFrame >= totalRespawnFrames)
+            {
+                spriteRenderer.sprite = playerSprite;
+                currentRespawnFrame = 0;
+                respawnBool = false;
+                EnemyManager.instance.isExploding = false;
+                transform.position = respawnPoint;
+            }
+        }
+    }
+
+    void ExplosionAnimation()
+    {
+        currentExplosionFrameDelay++;
+        if (currentExplosionFrameDelay >= explosionFramesDelay)
+        {
+            currentExplosionFrameDelay = 0;
+            isExplosionSprite1 = !isExplosionSprite1;
+            spriteRenderer.sprite = isExplosionSprite1 ? explosionSprite1 : explosionSprite2;
+        }
+        // si (condition) ? vrai : faux
+    }
+
 
     #region CalculateBoundaryAndGizmos
     void CalculateBoundary()

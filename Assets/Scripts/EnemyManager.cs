@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager instance;
     [SerializeField]
     GameObject player;
         float playerBoundaryX;
@@ -20,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     int remainingEnemies;
 
     bool isPaused = false;
-    bool isExploding = false;
+    public bool isExploding = false;
 
     enum MoveState {MoveRight, MoveLeft}
     MoveState currentState = MoveState.MoveRight;
@@ -32,6 +33,17 @@ public class EnemyManager : MonoBehaviour
     public int explosionDuration = 17;
     // Start is called once before the first execution of Upd
     // ate after the MonoBehaviour is created
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         playerBoundaryX = player.GetComponent<PlayerScript>().boundary;

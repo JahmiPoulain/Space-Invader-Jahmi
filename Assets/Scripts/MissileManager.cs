@@ -46,7 +46,7 @@ public class MissileManager : MonoBehaviour
         //Debug.Break();
         // set active le projectile sur le point
         //Debug.Log("googoo le gaga");
-        if (ctx.performed && !GameManager.instance.isPaused)
+        if (ctx.performed && !GameManager.instance.isPaused && !PlayerScript.instance.respawnBool)
         {
             for (int i = 0; i < poolSize; i++)
             {

@@ -1848,6 +1848,7 @@ MonoBehaviour:
   _stepDistance: 0.5
   stepDistanceVertical: 1
   startPosition: {x: -6.5, y: 7}
+  isExploding: 0
   missilePrefab: {fileID: 8324370934271325292, guid: 12e177a770618b14482ad26969388715, type: 3}
   missilePoint: {fileID: 0}
   missileInterval: 0.1
@@ -2562,12 +2563,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a562a0b3dc6b85f4bb916ce41fd3acad, type: 3}
+    - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: respawnPoint.x
       value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: respawnPoint.y
       value: -9.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
+      propertyPath: explosionFrames
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
+      propertyPath: explosionSprite1
+      value: 
+      objectReference: {fileID: 21300000, guid: 8446d5bdff4b93345a869be0a6baadde, type: 3}
+    - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
+      propertyPath: explosionSprite2
+      value: 
+      objectReference: {fileID: 21300000, guid: 8c240387635ee244281ffdd3777496bd, type: 3}
+    - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
+      propertyPath: totalRespawnFrames
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081733473036870879, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
+      propertyPath: explosionFramesDelay
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3085449332488759986, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: m_LocalPosition.x
