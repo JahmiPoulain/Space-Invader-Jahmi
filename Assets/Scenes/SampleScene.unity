@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.2
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -815,7 +815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.2
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1708,7 +1708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 141, y: -27}
+  m_AnchoredPosition: {x: 101.3, y: -27}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1757289282
@@ -1895,7 +1895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.2
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1972,7 +1972,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -181, y: -214}
+  m_AnchoredPosition: {x: -190.8, y: -214}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2026155047
@@ -2060,7 +2060,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -9.658905, z: 0, w: 0}
+  m_margin: {x: 0, y: -9.658905, z: 6.484291, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2480,7 +2480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.2
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 620425722661781583, guid: 485414061d5a28b438eea035e6e60d20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2600,7 +2600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3085449332488759986, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.24
+      value: -8.18
       objectReference: {fileID: 0}
     - target: {fileID: 3085449332488759986, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: m_LocalPosition.z

@@ -76,6 +76,10 @@ public class GameManager : MonoBehaviour
 
     public void LoseLife()
     {
+        if (PlayerScript.instance.respawnBool)
+        {
+            return;
+        }
         lives--;
         PlayerScript.instance.HitByMissile();
         // on enleve les vies en bas a gauche de l'ecran
