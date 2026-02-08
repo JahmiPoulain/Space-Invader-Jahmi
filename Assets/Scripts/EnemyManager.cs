@@ -31,8 +31,12 @@ public class EnemyManager : MonoBehaviour
     public float missileInterval = 2f;
 
     public int explosionDuration = 17;
-    // Start is called once before the first execution of Upd
-    // ate after the MonoBehaviour is created
+
+    [Header("Enemy Explosion")]
+    GameObject[] enemyExplPool;
+    public GameObject enemyExplPrefab;
+    public int enemyExplPoolSize;
+
     private void Awake()
     {
         if (instance == null)
@@ -54,7 +58,13 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(HandleEnemyMovement());
 
         StartCoroutine(EnemyShooting());
-        
+
+        enemyExplPool = new GameObject[enemyExplPoolSize];
+        for (int i = 0; i < enemyExplPoolSize; i++)
+        {
+            enemyExplPool[i] = Instantiate(enemyExplPrefab, new Vector3(100, 100, 0), Quaternion.identity);
+            enemyExplPool[i].SetActive(false);
+        }
     } 
 
     void SpawnEnemies()
@@ -225,6 +235,8 @@ public class EnemyManager : MonoBehaviour
 
     public void ReturnEnemy(GameObject enemy, GameObject prefab)
     {
+        ExplodeEnemy(enemy.transform.position);
+
         for (int row = 0; row < rows; row++)
         {
             for (int col = 0; col < columns; col++)
@@ -250,6 +262,20 @@ public class EnemyManager : MonoBehaviour
         if(remainingEnemies <= 0) 
         {
             GameManager.instance.CompletedLevel();
+        }
+    }
+
+    void ExplodeEnemy(Vector3 pos)
+    {
+        // si une explosion est inactive on l'active à l'endroit ou était l'ennemi détruit
+        for (int i = 0; i < enemyExplPoolSize; i++)
+        {
+            if (!enemyExplPool[i].activeSelf)
+            {
+                enemyExplPool[i].transform.position = pos;
+                enemyExplPool[i].SetActive(true);
+                return;
+            }
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MissileManager : MonoBehaviour
 {
+    public static MissileManager instance; // singleton pour acceder à playerMissileExpl
     [SerializeField]
     GameObject missilePrefab;
     [SerializeField]
@@ -15,9 +16,20 @@ public class MissileManager : MonoBehaviour
 
     InputSystem_Actions controls;
 
+    [Header("Player Missile Explosion")]
+    public GameObject playerMissileExpl; // il n'y en a que un à la fois de toutes façon donc pas de pooling
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         controls = new InputSystem_Actions(); // initialiser input
         controls.Player.Fire.performed += ctx => Fire(ctx);
     }
@@ -67,10 +79,10 @@ public class MissileManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame-
-    void Update()
+    public void MovePlayerMissileExpl(Vector3 pos)
     {
-        
+        playerMissileExpl.transform.position = pos;
+        playerMissileExpl.SetActive(true);
     }
 
 }
