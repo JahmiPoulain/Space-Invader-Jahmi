@@ -1912,7 +1912,7 @@ MonoBehaviour:
   isExploding: 0
   missilePrefab: {fileID: 8324370934271325292, guid: 12e177a770618b14482ad26969388715, type: 3}
   missilePoint: {fileID: 0}
-  missileInterval: 0.1
+  missileInterval: 2
   explosionDuration: 17
   enemyExplPrefab: {fileID: 9056103125347865076, guid: aa353fea74dc1f24d8cc37de0142fc23, type: 3}
   enemyExplPoolSize: 20
