@@ -26,7 +26,6 @@ public class EnemyPool : MonoBehaviour
 
             for (int j = 0; j < poolSize; j++)
             {
-                Debug.Log("gokdkdkdkd");
                 GameObject enemy = Instantiate(enemyType.prefab);
                 enemy.SetActive(false);
                 enemyQueue.Enqueue(enemy);
@@ -44,8 +43,6 @@ public class EnemyPool : MonoBehaviour
             enemy.SetActive(true);
             return enemy;
         }
-
-        Debug.Log("SPISPI");
         return null;
     }
 

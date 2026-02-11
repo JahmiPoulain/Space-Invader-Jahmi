@@ -201,7 +201,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1, y: -10.5, z: 0}
-  m_LocalScale: {x: 20, y: 0.1, z: 1}
+  m_LocalScale: {x: 23, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1907,8 +1907,10 @@ MonoBehaviour:
   columns: 11
   spacing: 1.5
   _stepDistance: 0.5
+  _stepDistIncreasePerWave: 0.1
   stepDistanceVertical: 1
   startPosition: {x: -6.5, y: 7}
+  remainingEnemies: 0
   isExploding: 0
   missilePrefab: {fileID: 8324370934271325292, guid: 12e177a770618b14482ad26969388715, type: 3}
   missilePoint: {fileID: 0}
@@ -2716,7 +2718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210290193215238795, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: poolSize
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6210290193215238795, guid: a25154129aff08f448fe98ddd831cd39, type: 3}
       propertyPath: playerMissileExpl

@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     public void CompletedLevel()
     {
         SaveScore();
-        Debug.Break();
+        //Debug.Break();
     }
 
     void SaveScore()

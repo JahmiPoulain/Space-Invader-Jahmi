@@ -14,11 +14,12 @@ public class EnemyManager : MonoBehaviour
     public int columns = 11;
     public float spacing = 1.5f;
     public float _stepDistance = 0.5f;
+    public float _stepDistIncreasePerWave = 0.1f;
     public float stepDistanceVertical = 1f;
 
     public Vector2 startPosition = new Vector2(-6.5f, 7.5f);
     GameObject[,] enemies;
-    int remainingEnemies;
+    public int remainingEnemies;
 
     bool isPaused = false;
     public bool isExploding = false;
@@ -31,6 +32,8 @@ public class EnemyManager : MonoBehaviour
     public float missileInterval = 2f;
 
     public int explosionDuration = 17;
+
+    bool firstWave = true;
 
     [Header("Enemy Explosion")]
     GameObject[] enemyExplPool;
@@ -53,9 +56,7 @@ public class EnemyManager : MonoBehaviour
         playerBoundaryX = player.GetComponent<PlayerScript>().boundary;
         enemies = new GameObject[rows, columns];
 
-        SpawnEnemies();
-
-        StartCoroutine(HandleEnemyMovement());
+        StartCoroutine(SpawnEnemies());        
 
         StartCoroutine(EnemyShooting());
 
@@ -65,12 +66,12 @@ public class EnemyManager : MonoBehaviour
             enemyExplPool[i] = Instantiate(enemyExplPrefab, new Vector3(100, 100, 0), Quaternion.identity);
             enemyExplPool[i].SetActive(false);
         }
-    } 
+    }
 
-    void SpawnEnemies()
+    IEnumerator SpawnEnemies()
     {
         var enemyTypes = EnemyPool.GetEnemyTypes();
-        for (int row = 0; row < rows; row++)
+        for (int row = rows - 1; row >= 0; row--)
         {
             var enemyType = GetEnemyTypForRow(row, enemyTypes);
             for (int col = 0; col < columns; col++)
@@ -79,7 +80,6 @@ public class EnemyManager : MonoBehaviour
 
                 if ( enemy != null)
                 {
-                    //Debug.Log("gagoo");
                     float xPos = startPosition.x + (col * spacing);
                     float yPos = startPosition.y - (row * spacing);
 
@@ -95,10 +95,24 @@ public class EnemyManager : MonoBehaviour
                     enemies[row, col] = enemy;
 
                     remainingEnemies++;
+                    yield return null;
                 }
             }
         }
+        //StopCoroutine(HandleEnemyMovement());
+        if (!firstWave)
+        {
+            _stepDistance += _stepDistIncreasePerWave; // les ennemis vont plus vite            
+        }
+        else
+        {
+            StartCoroutine(HandleEnemyMovement()); // à la première vague on lance la coroutine de mouvement
+            firstWave = false;
+        }
+        
     }
+
+
 
     IEnumerator HandleEnemyMovement()
     {
@@ -262,6 +276,7 @@ public class EnemyManager : MonoBehaviour
         if(remainingEnemies <= 0) 
         {
             GameManager.instance.CompletedLevel();
+            StartCoroutine(SpawnEnemies());
         }
     }
 
