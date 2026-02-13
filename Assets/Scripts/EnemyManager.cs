@@ -390,17 +390,19 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void GameIsOver()
+    public void GameIsOver() // ne fonctionne pas mais je laisse là au cas ou
     {
-        for (int row = 0; row < rows; row++)
+        // /!\/!\/!\/!\ ce bout de code fait cracher unity /!\/!\/!\/!\
+        /*for (int row = 0; row < rows; row++)
         {
             for (int col = 0; col < columns; col++)
             {
-                /*if (enemies[row, col] != null)
+                
+                if (enemies[row, col] != null)
                 {
                     enemies[row, col].SetActive(false);
-                }*/
+                }
             }
-        }
+        }*/
     }
 }

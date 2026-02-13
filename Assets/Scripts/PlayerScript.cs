@@ -274,7 +274,15 @@ public class PlayerScript : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(new Vector3(-boundary, -10, 0), new Vector3(-boundary, 10, 0));
         Gizmos.DrawLine(new Vector3(boundary, -10, 0), new Vector3(boundary, 10, 0));
-    } 
+    }
     #endregion
+
+    private void OnTriggerEnter2D(Collider2D collision) // si un ennemi nous touche on implose
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            GameManager.instance.GameOver();
+        }
+    }
 }
 

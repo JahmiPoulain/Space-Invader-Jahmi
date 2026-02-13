@@ -18,19 +18,19 @@ public class UFOScript : MonoBehaviour
         startRight = LeftOrRight();
 
         if (startRight)
-            transform.position = startPos;
+            transform.position = startPos; // spawn à droite
         else
-            transform.position = new Vector3 (-startPos.x, startPos.y, startPos.z);
+            transform.position = new Vector3 (-startPos.x, startPos.y, startPos.z); // spawn à gauche
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (frames >= 3)
+        if (frames >= 3) // Toutes les 3 frames
         {
-            if (startRight)
+            if (startRight) // si il commence à droite
             {
-                transform.position += new Vector3(-stepDistance, 0, 0);
-                if (transform.position.x < -startPos.x)
+                transform.position += new Vector3(-stepDistance, 0, 0); // on va à gauche
+                if (transform.position.x < -startPos.x) // si il ateint l'autre opposé de l'écran
                 {
                     gameObject.SetActive(false);
                 }
@@ -51,9 +51,9 @@ public class UFOScript : MonoBehaviour
     bool LeftOrRight() // choisit si il commence à droite ou à gauche
     {
         float rng = Random.Range(0, 2);
-        if (rng > 0)return true;
-        return false;
-        
+        if (rng > 0)return true; // 50%
+        return false; // 50%
+        // on peut l'optimiser d'avantage ça??
     }
 
     public void HitUFO() // appelé quand un muissile le touche

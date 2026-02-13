@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SaveScore();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        EnemyManager.instance.GameIsOver();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // coup de guillotine sur la scène
+        //EnemyManager.instance.GameIsOver();
     }
 
     public void CompletedLevel()
