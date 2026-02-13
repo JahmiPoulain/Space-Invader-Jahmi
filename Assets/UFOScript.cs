@@ -35,10 +35,14 @@ public class UFOScript : MonoBehaviour
         else
         {
             transform.position += new Vector3(speed, 0, 0);
+            if (transform.position.x > startPos.x)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
-    bool LeftOrRight()
+    bool LeftOrRight() // choisit si il commence à droite ou à gauche
     {
         float rng = Random.Range(0, 1);
         if (rng > 0)return true;

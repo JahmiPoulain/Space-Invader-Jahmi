@@ -72,9 +72,10 @@ public class EnemyManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (missilesShot > 24)
+        if (missilesShot >= 22)
         {
             theUFO.SetActive(true);
+            missilesShot = 0;
         }
     }
     IEnumerator SpawnEnemies()
