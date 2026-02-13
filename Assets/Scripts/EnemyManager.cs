@@ -42,6 +42,8 @@ public class EnemyManager : MonoBehaviour
     [Header("UFO")]
     public GameObject theUFO;
     public int missilesShot;
+    int missileShotSinceUFO;
+    bool UFODeployed;
     private void Awake()
     {
         if (instance == null)
@@ -72,12 +74,9 @@ public class EnemyManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (missilesShot >= 22)
-        {
-            theUFO.SetActive(true);
-            missilesShot = 0;
-        }
+        HandleUFO();        
     }
+
     IEnumerator SpawnEnemies()
     {
         var enemyTypes = EnemyPool.GetEnemyTypes();
@@ -330,7 +329,6 @@ public class EnemyManager : MonoBehaviour
         {
             return true;
         }
-
         if (currentState == MoveState.MoveLeft && xPos <= -playerBoundaryX)
         {
             return true;
@@ -351,6 +349,58 @@ public class EnemyManager : MonoBehaviour
         else
         {
             return enemyTypes[0];
+        }
+    }
+    public void PlayerShotAMissile()
+    {
+        missilesShot++;
+        if (UFODeployed)
+        {
+            missileShotSinceUFO++;
+        }
+    }
+    void HandleUFO()
+    {
+        if (missilesShot >= 22)
+        {
+            theUFO.SetActive(true);
+            UFODeployed = true;
+            missilesShot = 0;
+            missileShotSinceUFO = 0;
+        }       
+    }
+    public void UFODestroyed()
+    {
+        UFODeployed = false;
+        if (missileShotSinceUFO > 4)
+        {
+            GameManager.instance.AddScore(50);
+        }        
+        else if (missileShotSinceUFO == 3)
+        {
+            GameManager.instance.AddScore(100);
+        }
+        else if (missileShotSinceUFO == 2)
+        {
+            GameManager.instance.AddScore(150);
+        }
+        else
+        {
+            GameManager.instance.AddScore(300);
+        }
+    }
+
+    public void GameIsOver()
+    {
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < columns; col++)
+            {
+                /*if (enemies[row, col] != null)
+                {
+                    enemies[row, col].SetActive(false);
+                }*/
+            }
         }
     }
 }

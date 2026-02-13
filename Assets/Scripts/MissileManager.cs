@@ -72,7 +72,7 @@ public class MissileManager : MonoBehaviour
                     missilePool[i].SetActive(true);
 
                     currentMissileIndex = (index + 1) % poolSize;
-                    EnemyManager.instance.missilesShot++;
+                    EnemyManager.instance.PlayerShotAMissile();
                     return;
                 }
             }

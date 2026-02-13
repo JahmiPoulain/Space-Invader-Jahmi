@@ -6,7 +6,8 @@ public class UFOScript : MonoBehaviour
     bool startRight;
     public Vector3 startPos;
 
-    public float speed;
+    public float stepDistance;
+    int frames;
     void Start()
     {
          
@@ -24,35 +25,40 @@ public class UFOScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (startRight)
+        if (frames >= 3)
         {
-            transform.position += new Vector3( -speed, 0, 0);
-            if (transform.position.x < -startPos.x)
+            if (startRight)
             {
-                gameObject.SetActive(false);
+                transform.position += new Vector3(-stepDistance, 0, 0);
+                if (transform.position.x < -startPos.x)
+                {
+                    gameObject.SetActive(false);
+                }
             }
-        }
-        else
-        {
-            transform.position += new Vector3(speed, 0, 0);
-            if (transform.position.x > startPos.x)
+            else
             {
-                gameObject.SetActive(false);
+                transform.position += new Vector3(stepDistance, 0, 0);
+                if (transform.position.x > startPos.x)
+                {
+                    gameObject.SetActive(false);
+                }
             }
+            frames = 0;
         }
+        frames++;
     }
 
     bool LeftOrRight() // choisit si il commence à droite ou à gauche
     {
-        float rng = Random.Range(0, 1);
+        float rng = Random.Range(0, 2);
         if (rng > 0)return true;
         return false;
         
     }
 
-    public void HitUFO()
+    public void HitUFO() // appelé quand un muissile le touche
     {
         gameObject.SetActive(false);
-        // ajouter score
+        EnemyManager.instance.UFODestroyed();
     }
 }

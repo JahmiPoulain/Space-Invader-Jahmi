@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SaveScore();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        EnemyManager.instance.missilesShot = 0;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        EnemyManager.instance.GameIsOver();
     }
 
     public void CompletedLevel()
