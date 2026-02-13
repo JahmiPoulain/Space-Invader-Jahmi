@@ -28,7 +28,16 @@ public class PlayerMissile : MonoBehaviour
                 enemyManager.ReturnEnemy(collision.gameObject, go);
             }
             ResetMissile();
-        }       
+        }    
+        else if (collision.CompareTag("UFO"))
+        {
+            UFOScript UFOscript = collision.GetComponent<UFOScript>();
+            if (UFOscript != null)
+            {
+                UFOscript.HitUFO();
+            }
+            ResetMissile();
+        }
     }
 
     public void ResetMissile()

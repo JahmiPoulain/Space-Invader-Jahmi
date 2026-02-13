@@ -49,4 +49,10 @@ public class UFOScript : MonoBehaviour
         return false;
         
     }
+
+    public void HitUFO()
+    {
+        gameObject.SetActive(false);
+        // ajouter score
+    }
 }
