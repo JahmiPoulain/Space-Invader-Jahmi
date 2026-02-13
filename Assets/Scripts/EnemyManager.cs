@@ -39,7 +39,9 @@ public class EnemyManager : MonoBehaviour
     GameObject[] enemyExplPool;
     public GameObject enemyExplPrefab;
     public int enemyExplPoolSize;
-
+    [Header("UFO")]
+    public GameObject theUFO;
+    public int missilesShot;
     private void Awake()
     {
         if (instance == null)
@@ -68,6 +70,13 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (missilesShot > 24)
+        {
+            theUFO.SetActive(true);
+        }
+    }
     IEnumerator SpawnEnemies()
     {
         var enemyTypes = EnemyPool.GetEnemyTypes();

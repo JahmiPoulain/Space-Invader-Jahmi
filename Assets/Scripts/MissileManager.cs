@@ -14,8 +14,9 @@ public class MissileManager : MonoBehaviour
     GameObject[] missilePool;
     int currentMissileIndex = 0;
 
-    InputSystem_Actions controls;
 
+    InputSystem_Actions controls;
+    
     [Header("Player Missile Explosion")]
     public GameObject playerMissileExpl; // il n'y en a que un à la fois de toutes façon donc pas de pooling
 
@@ -71,7 +72,7 @@ public class MissileManager : MonoBehaviour
                     missilePool[i].SetActive(true);
 
                     currentMissileIndex = (index + 1) % poolSize;
-
+                    EnemyManager.instance.missilesShot++;
                     return;
                 }
             }

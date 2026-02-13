@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -101,11 +102,14 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SaveScore();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        EnemyManager.instance.missilesShot = 0;
     }
 
     public void CompletedLevel()
     {
         SaveScore();
+        EnemyManager.instance.missilesShot = 0;
         //Debug.Break();
     }
 
